@@ -1,7 +1,7 @@
 import unittest
-from ..statistics import Statistics
-from ..player import Player
-from ..statistics import sort_by_points
+from statistics import Statistics
+from player import Player
+from statistics import sort_by_points
 
 
 class PlayerReaderStub:
