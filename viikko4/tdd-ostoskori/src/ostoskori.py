@@ -5,7 +5,7 @@ class Ostoskori:
     def __init__(self):
         self.tuotteidenMaaraKorissa = 0
         self.kokonaishinta = 0
-        self.kaikkiOstokset = []
+        self.kaikkiOstokset = [] 
 
     def tavaroita_korissa(self):
         return self.tuotteidenMaaraKorissa
@@ -14,14 +14,21 @@ class Ostoskori:
         return self.kokonaishinta
 
     def lisaa_tuote(self, lisattava: Tuote):
-        if lisattava in self.kaikkiOstokset:
-            lisattava.muuta_lukumaara(1)
-        else:
-            uusiOstos = Ostos(lisattava)
-            self.kaikkiOstokset.append(uusiOstos)
-        
+        uusiOstos = Ostos(lisattava)
+
         self.tuotteidenMaaraKorissa += 1
         self.kokonaishinta = self.kokonaishinta + lisattava.hinta()
+
+        if len(self.kaikkiOstokset) == 0:
+            self.kaikkiOstokset.append(uusiOstos)
+        else:
+            for i in range (len(self.kaikkiOstokset)):
+                ostos: Ostos = self.kaikkiOstokset[i]
+                if ostos.tuotteen_nimi() == uusiOstos.tuotteen_nimi():
+                    ostos.muuta_lukumaaraa(1)
+                    return
+            self.kaikkiOstokset.append(uusiOstos)
+    
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
