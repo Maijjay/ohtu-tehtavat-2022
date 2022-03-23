@@ -4,16 +4,17 @@ from ostos import Ostos
 class Ostoskori:
     def __init__(self):
         self.tuotteet = []
+        self.kokonaishinta = 0
 
     def tavaroita_korissa(self):
         return len(self.tuotteet)
     
     def hinta(self):
-        return 0
-        # kertoo korissa olevien ostosten yhteenlasketun hinnan
+        return self.kokonaishinta
 
     def lisaa_tuote(self, lisattava: Tuote):
         self.tuotteet.append(lisattava)
+        self.kokonaishinta = self.kokonaishinta + lisattava.hinta()
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
